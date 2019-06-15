@@ -12,7 +12,7 @@ class Node<T> {
 
 enum BinaryTree<T> {
     case empty
-    // node is recursive in this case, because it's calling itself
+    // node is recursive type in this case, because it's calling itself
     // without being marked indirect, the node *could* allocate memory for iteself indefinitely
     // indirect introduces some reference semantics to this enum case (which would otherwise
     // be a value type). (I think) Swift then lazy-loads more memory for the structure under the hood.
@@ -65,6 +65,4 @@ extension BinaryTree: CustomStringConvertible {
 
 print(tree)
 print(tree.count)
-
-// insertion into binary tree
 
