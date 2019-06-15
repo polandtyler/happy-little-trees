@@ -35,6 +35,13 @@ func (t *Tree) Find(val int) *Node {
 	return t.root.Find(val)
 }
 
+func (t *Tree) FindWhere(pred func(*Node) bool) *Node {
+	if t.root == nil {
+		return nil
+	}
+	return t.root.FindWhere(pred)
+}
+
 // Node Methods
 
 func (n *Node) Insert(newNode *Node) {
@@ -65,4 +72,16 @@ func (n *Node) Find(val int) *Node {
 	}
 
 	return nil
+}
+
+func (n *Node) FindWhere(pred func(*Node) bool) *Node {
+	if n != nil {
+		if pred(n) {
+			return n
+		}
+		n.left.FindWhere(pred)
+		n.right.FindWhere(pred)
+	}
+
+	return n
 }
