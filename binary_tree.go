@@ -19,68 +19,67 @@ type Node struct {
 }
 
 // Tree Methods
-
 func (t *Tree) Insert(node *Node) {
 	if t.root == nil {
 		t.root = node
 		return
 	}
-	t.root.Insert(node)
+	insert(t.root, node)
 }
 
 func (t *Tree) Find(val int) *Node {
 	if t.root == nil {
 		return nil
 	}
-	return t.root.Find(val)
+	return find(t.root, val)
 }
 
 func (t *Tree) FindWhere(pred func(*Node) bool) *Node {
 	if t.root == nil {
 		return nil
 	}
-	return t.root.FindWhere(pred)
+	return findWhere(t.root, pred)
 }
 
 // Node Methods
 
-func (n *Node) Insert(newNode *Node) {
-	if newNode.val < n.val {
-		if n.left == nil {
-			n.left = newNode
+func insert(rootNode *Node, newTreeNode *Node) {
+	if newTreeNode.val < rootNode.val {
+		if rootNode.left == nil {
+			rootNode.left = newTreeNode
 		} else {
-			n.left.Insert(newNode)
+			insert(rootNode.left, newTreeNode)
 		}
 	} else {
-		if n.right == nil {
-			n.right = newNode
+		if rootNode.right == nil {
+			rootNode.right = newTreeNode
 		} else {
-			n.right.Insert(newNode)
+			insert(rootNode.right, newTreeNode)
 		}
 	}
 }
 
-func (n *Node) Find(val int) *Node {
+func find(n *Node, val int) *Node {
 	if n != nil {
 		if n.val == val {
 			return n
 		} else if val < n.val {
-			n.left.Find(val)
+			find(n.left, val)
 		} else {
-			n.right.Find(val)
+			find(n.right, val)
 		}
 	}
 
 	return nil
 }
 
-func (n *Node) FindWhere(pred func(*Node) bool) *Node {
+func findWhere(n *Node, pred func(*Node) bool) *Node {
 	if n != nil {
 		if pred(n) {
 			return n
 		}
-		n.left.FindWhere(pred)
-		n.right.FindWhere(pred)
+		findWhere(n.left, pred)
+		findWhere(n.right, pred)
 	}
 
 	return n
