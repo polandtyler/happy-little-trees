@@ -116,7 +116,7 @@ class BinarySearchTree {
       // NOTE: uses inorder traversal to find inorder successor and removed
       // inorder traversal (left, root, right)
       // method using parent pointer
-      // 1. if the right subtree of node IS NOT null, find thr min key-value in right subtree
+      // 1. if the right subtree of node IS NOT null, find the min key-value in right subtree
       // 2. if the right subtree of node IS null, travel up the tree (using the parent pointer) until you see
       //    a node that is the left child of its parent. THAT node's parent is the successor.
 
